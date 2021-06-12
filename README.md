@@ -10,10 +10,10 @@ pip install ...
 
 ## 使用例
 ```python
-from kantan_ml import KanatanML
+from kantan_ml import KantanML
 
 # ドライバを設定 & 初期化
-ml = KanatanML('/path/to/chromedriver')
+ml = KantanML('/path/to/chromedriver')
 
 # データセットの作成(スクレイピング)
 ml.download_images(['月ノ美兎', '樋口楓', '静凛'], 5)

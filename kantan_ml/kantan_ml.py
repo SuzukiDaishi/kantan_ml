@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 import time, glob
 from .kanatan_model import KantanModel, KerasModel
 
-class KanatanML:
+class KantanML:
     
     def __init__(self, chromedriver_path: Optional[str] = None,
                  output_dir: str = os.path.abspath('.'), 
