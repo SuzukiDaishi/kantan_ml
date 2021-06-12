@@ -5,7 +5,7 @@
 
 ## pip install
 ```bash=
-pip install ...
+pip install git+https://github.com/SuzukiDaishi/kantan_ml
 ```
 
 ## 使用例
