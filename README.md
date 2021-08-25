@@ -48,6 +48,8 @@ for k in out:
 ## 単体で使う場合
 
 ```bash
+# DockerでSeleniumを準備
+docker run -d -p 4444:4444 selenium/standalone-chrome 
 
 # gitからcloneする
 git clone https://github.com/SuzukiDaishi/kantan_ml.git
