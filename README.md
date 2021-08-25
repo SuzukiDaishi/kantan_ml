@@ -44,3 +44,23 @@ for k in out:
     print(k, ':', out[k])
 
 ```
+
+## 単体で使う場合
+
+```bash
+
+# gitからcloneする
+git clone https://github.com/SuzukiDaishi/kantan_ml.git
+cd kantan_ml
+
+# データセット作成 & 学習します
+# --labels: 学習するラベルを複数記載する
+# --save-dir: 保存するディレクトリ+保存名をフルパスで記載する
+python example.py train --labels 月ノ美兎 樋口楓 静凛 --save-dir /path/to/dir/model_name
+
+# 推論する
+# --labels: train時と同様
+# --save-dir: train時と同様
+# --images-url: 推論する画像のURLを表示する
+python example.py inference --labels 月ノ美兎 樋口楓 静凛 --save-dir /path/to/dir/model_name --images-url http://path/to/img.png http://path/to/img.jpg https://path/to/img2.png
+```

@@ -15,6 +15,7 @@ class KantanML:
     
     def __init__(self, chromedriver_path: Optional[str] = None,
                  output_dir: str = os.path.abspath('.'), 
+                 output_file: str = 'outputs',
                  is_all_clean: bool = False,) -> None:
         '''
         クラスの初期化
@@ -53,7 +54,7 @@ class KantanML:
 
             self.driver = webdriver.Chrome(chromedriver_path, options=options)
         
-        self.output_dir: str       = os.path.join(output_dir, 'outputs')
+        self.output_dir: str       = os.path.join(output_dir, output_file)
         self.label_output_dir: str = os.path.join(self.output_dir, 'labels')
         self.model_output_dir: str = os.path.join(self.output_dir, 'models')
         self.log_output_dir: str   = os.path.join(self.output_dir, 'log')

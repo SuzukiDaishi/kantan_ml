@@ -76,7 +76,7 @@ class KantanModel:
         '''
 
         f = io.BytesIO(urllib.request.urlopen(img_url).read())
-        img = Image.open(f)
+        img = Image.open(f).convert('RGB')
         img = img.resize((256, 256))
         img = tf.keras.preprocessing.image.img_to_array(img) / 255.
         img = img.reshape(1, 256, 256, -1)
@@ -99,7 +99,7 @@ class KantanModel:
         '''
 
         f = io.BytesIO(urllib.request.urlopen(img_url).read())
-        img = Image.open(f)
+        img = Image.open(f).convert('RGB')
         img = img.resize((256, 256))
         img = tf.keras.preprocessing.image.img_to_array(img) / 255.
         img = img.reshape(1, 256, 256, -1)
