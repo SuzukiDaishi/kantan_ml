@@ -7,6 +7,7 @@ from PIL import Image
 from typing import List, Optional, Tuple
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver import DesiredCapabilities
 import time, glob
 from .kanatan_model import KantanModel, KerasModel
 
@@ -29,21 +30,34 @@ class KantanML:
             毎回初期化の処理を行うか否か？
         '''
 
-        options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--start-fullscreen')
-        options.add_argument('--disable-plugins')
-        options.add_argument('--disable-extensions')
+        if chromedriver_path is None: 
+            print('Kanatan_ML: 引数chromedriver_path が None の場合データセットの作成を行えません')
+
+        if chromedriver_path[:4] == 'http':
+            options = webdriver.ChromeOptions()
+            options.binary_location = '/usr/bin/google-chrome'
+            options.add_argument('--no-sandbox')
+            options.add_argument('--headless')
+            options.add_argument('--disable-gpu')
+            capabilities = options.to_capabilities()
+            self.driver = webdriver.Remote(command_executor=chromedriver_path,
+                                           desired_capabilities=capabilities)
+        else:
+            options = Options()
+            options.add_argument('--headless')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--start-fullscreen')
+            options.add_argument('--disable-plugins')
+            options.add_argument('--disable-extensions')
+
+            self.driver = webdriver.Chrome(chromedriver_path, options=options)
         
         self.output_dir: str       = os.path.join(output_dir, 'outputs')
         self.label_output_dir: str = os.path.join(self.output_dir, 'labels')
         self.model_output_dir: str = os.path.join(self.output_dir, 'models')
         self.log_output_dir: str   = os.path.join(self.output_dir, 'log')
-        if chromedriver_path is None: print('Kanatan_ML: 引数chromedriver_path が None の場合データセットの作成を行えません')
-        self.driver                = webdriver.Chrome(chromedriver_path, options=options)
-        self._init_output_dir(is_clean_dir=is_all_clean)
+        self._init_output_dir(is_clean_dir = is_all_clean)
     
     def __del__(self):
         self.driver.close()

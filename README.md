@@ -3,8 +3,13 @@
 ## 事前準備
 `chromedriver`をインストール
 
+### Dockerでどっかーん！！の場合
+```bash
+docker run -d -p 4444:4444 selenium/standalone-chrome
+```
+
 ## pip install
-```bash=
+```bash
 pip install git+https://github.com/SuzukiDaishi/kantan_ml
 ```
 
@@ -14,6 +19,9 @@ from kantan_ml import KantanML
 
 # ドライバを設定 & 初期化
 ml = KantanML('/path/to/chromedriver')
+
+# Dockerでstandalone-chromeを用意した場合
+# ml = KantanML('http://localhost:4444/wd/hub')
 
 # データセットの作成(スクレイピング)
 ml.download_images(['月ノ美兎', '樋口楓', '静凛'], 5)
